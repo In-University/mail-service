@@ -1,5 +1,5 @@
 package com.mail_service.entity;
-
+ 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,13 +8,13 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor; 
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder 
 public class User { 
     @Id 
     @Column(name = "id")  
@@ -35,4 +35,4 @@ public class User {
     
     @Column(name = "active",nullable = false)
     private Boolean active; 
-}   
+}    
