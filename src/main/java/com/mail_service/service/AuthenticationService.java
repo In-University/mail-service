@@ -1,7 +1,6 @@
 package com.mail_service.service;
 
-import com.mail_service.dto.request.AuthenticationRequest;
-import com.mail_service.dto.response.ApiResponse;
+import com.mail_service.dto.request.LoginRequest;
 import com.mail_service.entity.User;
 import com.mail_service.repository.UserRepository;
 import com.nimbusds.jose.*;
@@ -13,7 +12,6 @@ import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,6 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -46,10 +43,10 @@ public class AuthenticationService {
         return isValid;
     }
 
-    public String authenticate(AuthenticationRequest request) {
+    public String authenticate(LoginRequest request) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         var user = userRepository
-                .findByUsername(request.getUsername())
+                .findByEmail(request.getMail())
                 .orElseThrow(() -> new RuntimeException("User not existed"));
 
         boolean authenticated = passwordEncoder.matches(request.getPassword(), user.getPassword());
@@ -63,7 +60,7 @@ public class AuthenticationService {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(user.getUsername())
+                .subject(user.getEmail())
                 .issuer("mobile-dev")
                 .issueTime(new Date())
                 .expirationTime(new Date(

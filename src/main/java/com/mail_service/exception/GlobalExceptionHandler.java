@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<ApiResponse<?>> handleAppException(RuntimeException ex) {
+        return new ResponseEntity<>(ApiResponse.error("Error: " + ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponse<?>> handleRuntimeException(RuntimeException ex) {
         return new ResponseEntity<>(ApiResponse.error(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -15,6 +20,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<?>> handleException(Exception ex) {
-        return new ResponseEntity<>(ApiResponse.error("Unexpected error"), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(ApiResponse.error("Unexpected error: " + ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

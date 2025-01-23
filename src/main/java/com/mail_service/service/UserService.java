@@ -28,9 +28,4 @@ public class UserService {
         user.setActive(true);
         userRepository.save(user);
     }
-    
-    public boolean checkLogin(String username, String password) {
-    	List<User> user = userRepository.findByUsernameAndPassword(username, password); 
-    	return user.size() > 0 ? true : false;
-    }
 }

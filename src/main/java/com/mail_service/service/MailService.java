@@ -49,7 +49,6 @@ public class MailService {
         return true;
     }
 
-
     public void sendOtpEmail(String recipientEmail, String otpCode) {
         try {
             MimeMessage message = mailSender.createMimeMessage();

@@ -69,14 +69,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid OTP.");
         }
     }
-    
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> requestBody) {
-        String username = requestBody.get("username");
-        String password = requestBody.get("password");  
-        
-        return userService.checkLogin(username, password) 
-        		? ResponseEntity.ok("Login success!")
-        		: ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Login fail!"); 
-    } 
 }
