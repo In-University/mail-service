@@ -54,6 +54,7 @@ public class MailService {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
+            helper.setFrom("admin@mkhoavo.space");
             helper.setTo(recipientEmail);
             helper.setSubject("Your OTP Code");
 
