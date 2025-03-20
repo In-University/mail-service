@@ -29,8 +29,6 @@ public class User {
 
     @Column(name = "password",nullable = false)
     private String password; 
-    
     @Column(name = "active",nullable = false)
     private Boolean active;
-    private String imageUrl;
-}    
+}

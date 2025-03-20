@@ -9,5 +9,4 @@ import lombok.NoArgsConstructor;
 public class UserResponseDTO {
     private String email;
     private String name;
-    private String imageUrl;
 }
