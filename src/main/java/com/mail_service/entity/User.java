@@ -32,7 +32,5 @@ public class User {
     
     @Column(name = "active",nullable = false)
     private Boolean active;
-
-    @Column(name = "image_url",nullable = false)
     private String imageUrl;
 }    
