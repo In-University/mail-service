@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 
+// Võ Minh Khoa
+// MSSV: 22110355
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor

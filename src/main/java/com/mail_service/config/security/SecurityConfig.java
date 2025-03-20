@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+// Võ Minh Khoa
+// MSSV: 22110355
 @Configuration
 public class SecurityConfig {
     @Autowired
