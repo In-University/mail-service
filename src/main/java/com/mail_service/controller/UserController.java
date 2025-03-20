@@ -1,29 +1,31 @@
 package com.mail_service.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import com.mail_service.dto.request.ResetPasswordRequest;
+import com.mail_service.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mail_service.entity.User;
 import com.mail_service.service.MailService;
 import com.mail_service.service.UserService;
 
+// Võ Minh Khoa
+// MSSV: 22110355
 @RestController
 public class UserController {
     @Autowired
     private MailService mailService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody User user) {
@@ -97,5 +99,18 @@ public class UserController {
         return isValid
                 ? ResponseEntity.ok("OTP is valid")
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid OTP");
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile(@RequestHeader("Authorization") String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body("Invalid Authorization header");
+        }
+
+        String token = authHeader.substring(7);
+        String email = authenticationService.extractEmailFromToken(token);
+
+
+        return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 }

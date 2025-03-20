@@ -22,6 +22,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.UUID;
 
+// Lê Anh Tú
+// MSSV: 22110453
 @Service
 @Slf4j
 public class AuthenticationService {
@@ -94,5 +96,14 @@ public class AuthenticationService {
             throw new RuntimeException("Token expired");
 
         return signedJWT;
+    }
+
+    public static String extractEmailFromToken(String token) {
+        try {
+            JWSObject jwsObject = JWSObject.parse(token);
+            return jwsObject.getPayload().toJSONObject().get("sub").toString();
+        } catch (ParseException e) {
+            throw new RuntimeException("Invalid token", e);
+        }
     }
 }

@@ -31,5 +31,8 @@ public class User {
     private String password; 
     
     @Column(name = "active",nullable = false)
-    private Boolean active; 
+    private Boolean active;
+
+    @Column(name = "image_url",nullable = false)
+    private String imageUrl;
 }    

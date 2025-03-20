@@ -1,5 +1,6 @@
 package com.mail_service.service;
 
+import com.mail_service.dto.response.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.mail_service.entity.User;
 import com.mail_service.repository.UserRepository;
 
+// Lê Anh Tú
+// MSSV: 22110453
 @Service
 public class UserService {
     @Autowired
@@ -26,6 +29,13 @@ public class UserService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public UserResponseDTO getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return new UserResponseDTO(user.getEmail(), user.getName(), user.getImageUrl());
     }
 
     public void activateUser(String email) {
