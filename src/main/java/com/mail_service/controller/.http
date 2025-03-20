@@ -1,0 +1,13 @@
+### Lấy danh sách tất cả Category
+GET http://localhost:8080/api/categories
+Content-Type: application/json
+
+
+### Lấy danh sách Product theo Category (ví dụ: Category có id = 1)
+GET http://localhost:8080/api/categories/1/products
+Content-Type: application/json
+
+
+### Lấy danh sách tất cả Product
+GET http://localhost:8080/api/products
+Content-Type: application/json
