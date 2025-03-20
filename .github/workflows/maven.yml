@@ -22,7 +22,6 @@ jobs:
 
       - name: Build project with Maven
         run: |
-          cd backend
           mvn clean package -DskipTests
 
       - name: Log in to Docker Hub
