@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -37,7 +36,6 @@ jobs:
         env:
           IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/mail-service:latest
         run: |
-          cd backend
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
