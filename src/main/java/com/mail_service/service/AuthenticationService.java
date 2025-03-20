@@ -95,4 +95,13 @@ public class AuthenticationService {
 
         return signedJWT;
     }
+
+    public static String extractEmailFromToken(String token) {
+        try {
+            JWSObject jwsObject = JWSObject.parse(token);
+            return jwsObject.getPayload().toJSONObject().get("sub").toString();
+        } catch (ParseException e) {
+            throw new RuntimeException("Invalid token", e);
+        }
+    }
 }
