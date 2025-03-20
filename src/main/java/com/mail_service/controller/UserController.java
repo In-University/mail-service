@@ -27,21 +27,23 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody User user) {
-        try {
-            user.setActive(false);
+        // try {
+        //     user.setActive(false);
 
-            if (userService.create(user)) {
-                mailService.generateAndSendOtp(user.getEmail());
-                return ResponseEntity.ok("Registration in progress. Please verify your email.");
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("Failed to register user.");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An unexpected error occurred: " + e.getMessage());
-        }
+        //     if (userService.create(user)) {
+        //         mailService.generateAndSendOtp(user.getEmail());
+        //         return ResponseEntity.ok("Registration in progress. Please verify your email.");
+        //     } else {
+        //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        //                 .body("Failed to register user.");
+        //     }
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        //             .body("An unexpected error occurred: " + e.getMessage());
+        // }
+        mailService.generateAndSendOtp(user.getEmail());
+        return ResponseEntity.ok("Registration in progress. Please verify your email.");
     }
 
     @PostMapping("/validate-otp-register")
