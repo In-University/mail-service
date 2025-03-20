@@ -3,7 +3,6 @@ name: CI/CD Workflow
 on:
   push:
     branches:
-      - main
       - feature/integrate-cicd
   pull_request:
     branches:
